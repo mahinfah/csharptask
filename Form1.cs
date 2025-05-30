@@ -147,5 +147,25 @@ namespace task
            */
 
         }
+
+        private void search_Click(object sender, EventArgs e)
+        {
+            //search
+
+
+            string connectionString = @"Data Source=MAHIN;Initial Catalog=testing_db;Integrated Security=True;";
+            SqlConnection con = new SqlConnection(connectionString);
+
+
+            con.Open();
+            string Q = "SELECT * FROM Table_4 WHERE id = '" + int.Parse(txt_id.Text) + "'";
+            SqlCommand cmd = new SqlCommand(Q, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            Show();
+           //Clear();
+
+
+        }
     }
 }
