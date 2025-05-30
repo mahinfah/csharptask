@@ -30,10 +30,13 @@ namespace task
         
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {//
-            txt_name.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+        {  
 
-            txt_id.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+              
+            txt_id.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+            txt_name.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+           
 
 
             //id.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
@@ -51,7 +54,7 @@ namespace task
            string connectionString = @"Data Source=MAHIN;Initial Catalog=testing_db;Integrated Security=True;";
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
-            string q = "select *from Table_2";
+            string q = "select *from Table_4";
             SqlCommand cmd = new SqlCommand(q, conn);
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
@@ -88,10 +91,12 @@ namespace task
 
         }
         private void Clear()
-        {
-            txt_name.Text = "";
-            txt_id.Text = "";
-                
+       {
+ txt_id.Text = ""; 
+
+                 txt_name.Text = "";
+          
+           
             // comboBox1.Text = "";
         }
 
@@ -101,7 +106,7 @@ namespace task
             string connectionString = @"Data Source=MAHIN;Initial Catalog=testing_db;Integrated Security=True;";
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
-            string Q = "DELETE FROM table_2 WHERE id="+txt_id.Text;
+            string Q = "DELETE FROM Table_4 WHERE id="+txt_id.Text;
             SqlCommand cmd= new SqlCommand(Q, conn);
             cmd.ExecuteNonQuery();
             Show();
@@ -115,10 +120,31 @@ namespace task
         private void button3_Click(object sender, EventArgs e)
         {
             //update
+            
             string connectionString = @"Data Source=MAHIN;Initial Catalog=testing_db;Integrated Security=True;";
             SqlConnection con = new SqlConnection(connectionString);
             con.Open();
-           //----- string q="UPDATE table_2 SET Name='"+txt_name.Text+'",id
+            string q = "UPDATE Table_4 SET name='"+ txt_name.Text + "'WHERE id=" + txt_id.Text ;
+            SqlCommand cmd = new SqlCommand(q, con);
+            cmd.ExecuteNonQuery();
+            Show();
+            Clear();
+            
+           /*tring connectionString = @"Data Source=MAHIN;Initial Catalog=testing_db;Integrated Security=True;";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                string q = "UPDATE Table_4 SET NAME = @name WHERE id = @id";
+                using (SqlCommand cmd = new SqlCommand(q, con))
+                {
+                    cmd.Parameters.AddWithValue("@name", txt_name.Text);
+                    cmd.Parameters.AddWithValue("@id", txt_id.Text);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            Show();
+            Clear();
+           */
 
         }
     }
