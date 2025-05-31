@@ -160,10 +160,17 @@ namespace task
             con.Open();
             string Q = "SELECT * FROM Table_4 WHERE id = '" + int.Parse(txt_id.Text) + "'";
             SqlCommand cmd = new SqlCommand(Q, con);
-            SqlDataReader reader = cmd.ExecuteReader();
 
-            Show();
-           //Clear();
+         //   SqlDataReader reader = cmd.ExecuteReader();
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+          //  DataSet ds = new DataSet();
+          //  DataSet ds = new DataSet();
+         //   adp.Fill(ds);
+            DataTable dt = new DataTable();
+             adp.Fill(dt);
+             dataGridView1.AutoGenerateColumns = true;
+            dataGridView1.DataSource = dt;
+             
 
 
         }
